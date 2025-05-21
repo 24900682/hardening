@@ -1,35 +1,81 @@
-To set a GRUB password (for GRUB2), follow these steps:
+1.What is the command to set the grub password?
+solution:
 
-1. Generate a GRUB password hash:
-Use the grub-mkpasswd-pbkdf2 command to generate a hashed password:
+    To set a GRUB password (for GRUB2), follow these steps:
 
-
-grub-mkpasswd-pbkdf2
-Enter your desired password when prompted.
-
-You’ll get output like this:
+    1. Generate a GRUB password hash:
+    Use the grub-mkpasswd-pbkdf2 command to generate a hashed password:
 
 
-PBKDF2 hash of your password is grub.pbkdf2.sha512.10000.XXXXXXXXXXXXXXXXX
-2. Edit the GRUB configuration file:
-Open /etc/grub.d/40_custom with a text editor:
+    grub-mkpasswd-pbkdf2
+    Enter your desired password when prompted.
+
+    You’ll get output like this:
 
 
-sudo nano /etc/grub.d/40_custom
-Add the following lines:
-
-set superuser="admin"
-password_pbkdf2 admin grub.pbkdf2.sha512.10000.XXXXXXXXXXXXXXXXX
-Replace "admin" with your desired username and paste the hashed password.
-
-3. Update GRUB:
-After editing the config, update GRUB so the changes take effect:
+    PBKDF2 hash of your password is grub.pbkdf2.sha512.10000.XXXXXXXXXXXXXXXXX
+    2. Edit the GRUB configuration file:
+    Open /etc/grub.d/40_custom with a text editor:
 
 
-sudo update-grub
-4. (Optional) Restrict menu entries:
-To restrict specific menu entries (like recovery mode), edit /etc/grub.d/10_linux or other appropriate scripts and add:
+    sudo nano /etc/grub.d/40_custom
+    Add the following lines:
 
-menuentry 'Your Entry' --users admin {
-    ...
-}
+    set superuser="admin"
+    password_pbkdf2 admin grub.pbkdf2.sha512.10000.XXXXXXXXXXXXXXXXX
+    Replace "admin" with your desired username and paste the hashed password.
+
+    3. Update GRUB:
+    After editing the config, update GRUB so the changes take effect:
+
+
+    sudo update-grub
+    4. (Optional) Restrict menu entries:
+    To restrict specific menu entries (like recovery mode), edit /etc/grub.d/10_linux or other appropriate scripts and add:
+
+    menuentry 'Your Entry' --users admin {
+        ...
+    }
+
+2.How to run the script ubuntu.sh?
+Solution:
+    To run a script like ubuntu.sh on Ubuntu (or any Linux distribution), follow these steps:
+
+    1. Make sure the script is executable
+    Open a terminal and navigate to the directory containing ubuntu.sh, then run:
+
+
+    chmod +x ubuntu.sh
+    This command gives the script execute permission.
+
+   2. Run the script
+    There are two common ways to run the script:
+
+    ➤ If you're in the same directory:
+
+    ./ubuntu.sh
+    ➤ If you want to use a shell explicitly:
+    
+    bash ubuntu.sh
+    or
+
+
+    sh ubuntu.sh
+    Bonus Tips:
+    If the script requires sudo (i.e. root privileges), run:
+
+    
+    sudo ./ubuntu.sh
+    If you get a "command not found" or "permission denied" error, make sure:
+
+    You’re in the correct directory.
+
+    The script has Unix line endings (not Windows \r\n).
+    You can convert it using:
+
+
+    dos2unix ubuntu.sh
+
+
+
+
