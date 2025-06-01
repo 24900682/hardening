@@ -282,6 +282,6 @@ Solution:
     Now you can run it using:
 
 
-    ./install.sh
+    ./install.sh    
 
 
